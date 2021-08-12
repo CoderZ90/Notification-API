@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Coding by CodingFire - youtube.com/codingfire -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Notification API Javascript | CodingFire</title>
+</head>
+<body>
+  <button class="btn">Show Notification</button>
+  <!-- Now javascript - please open live server or it will not work -->
+  <script>
+    // Now lets make a device notification
+    function showNotification() {
+      const notification = new Notification(
+        "New message from Coding Fire! 🔥", {
+          // Body text
+          body: "Hey buddy! Hope you are safe and fine also dont forget to subscribe 🥰💖"
+        }
+      )
+      // Now it is doing nothing so lets put a link when we click on it
+      notification.onclick = function() {
+        window.open('https://youtube.com/c/Codingfire')
+      }
+    }
+    // Now we need to display it right so lets call the function when it clicked 
+
+    const button = document.querySelector('.btn');
+    button.addEventListener('click', () => {
+      if (Notification.permission === "granted") {
+        showNotification();
+      } else if (Notification.permission !== "denied"){
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            showNotification();
+          }
+        });
+      }
+    })
+  </script>
+</body>
+</html>
